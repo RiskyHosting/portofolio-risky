@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risky Dinata — Portfolio</title>
+<meta name="description" content="Portfolio pribadi Risky Dinata, siswa DKV yang memiliki ketertarikan pada desain, programming, teknologi, web development, dan berbagai proyek digital.">
+<meta name="theme-color" content="#060D13">
+<meta property="og:title" content="Risky Dinata — Portfolio">
+<meta property="og:description" content="Student • Visual Designer • Developer. Kabupaten Cirebon, Indonesia.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script>
+  /* Anti-FOUC theme — jalan sebelum render */
+  (function () {
+    try {
+      var t = localStorage.getItem('rd-theme');
+      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+
+<body>
+
+<!-- ============================================================
+     PARTICLE CANVAS
+     ============================================================ -->
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+<!-- ============================================================
+     SVG ICON SPRITE
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M5.6 5.6l4.2 4.2M14.2 14.2l4.2 4.2M5.6 18.4l4.2-4.2M14.2 9.8l4.2-4.2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 4-3 15-7-5-3 3-1-5-5-2z"/><path d="m21 4-15 8 5 2 10-10z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.07 5.07 0 0 0 4 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 8 18.13V22"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v9.5a4 4 0 1 1-4-4"/><path d="M14 6c.5 3 2.5 4.5 5 4.5"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.2 7.9L3 21l1.2-4.5A9 9 0 1 1 21 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-.8.8a3 3 0 0 1-1.5-1.5l.8-.8-1-2z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0 0 18c1.1 0 2-.9 2-2v-1.5a1.5 1.5 0 0 1 1.5-1.5H18a3 3 0 0 0 3-3 9 9 0 0 0-9-9z"/><circle cx="7.5" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="11.5" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="7" y="5" width="3.5" height="14" rx="1.2"/><rect x="13.5" y="5" width="3.5" height="14" rx="1.2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 18 18M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m3 17 5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="m8.5 12.5-1 8.5 4.5-3 4.5 3-1-8.5"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2 13.9 9.1 21 11l-7.1 1.9L12 20l-1.9-7.1L3 11l7.1-1.9z"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="15" width="4" height="6" rx="1.5"/><rect x="17" y="15" width="4" height="6" rx="1.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-mark">RD</span>
+      <span>Risky Dinata<span class="brand-dot">.</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+      <a href="#home" data-nav="home"><svg><use href="#i-home"/></svg>Beranda</a>
+      <a href="#about" data-nav="about"><svg><use href="#i-user"/></svg>Tentang</a>
+      <a href="#skills" data-nav="skills"><svg><use href="#i-sparkles"/></svg>Keahlian</a>
+      <a href="#projects" data-nav="projects"><svg><use href="#i-grid"/></svg>Proyek</a>
+      <a href="#experience" data-nav="experience"><svg><use href="#i-briefcase"/></svg>Pengalaman</a>
+      <a href="#education" data-nav="education"><svg><use href="#i-graduation"/></svg>Pendidikan</a>
+      <a href="#contact" data-nav="contact"><svg><use href="#i-mail"/></svg>Kontak</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema">
+        <svg class="ico-sun"><use href="#i-sun"/></svg>
+        <svg class="ico-moon"><use href="#i-moon"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobilePanel">
+        <span class="bars"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#home"><svg><use href="#i-home"/></svg>Beranda</a>
+    <a href="#about"><svg><use href="#i-user"/></svg>Tentang</a>
+    <a href="#skills"><svg><use href="#i-sparkles"/></svg>Keahlian</a>
+    <a href="#projects"><svg><use href="#i-grid"/></svg>Proyek</a>
+    <a href="#experience"><svg><use href="#i-briefcase"/></svg>Pengalaman</a>
+    <a href="#education"><svg><use href="#i-graduation"/></svg>Pendidikan</a>
+    <a href="#contact"><svg><use href="#i-mail"/></svg>Kontak</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="status-pill" data-anim style="--d:.05s"><span class="dot"></span> Sedang belajar &amp; membangun</p>
+        <h1 class="hero-title" aria-label="Risky Dinata.">
+          <span class="line"><span style="--d:.12s">Risky</span></span>
+          <span class="line"><span class="accent" style="--d:.26s">Dinata.</span></span>
+        </h1>
+        <p class="hero-sub" data-anim style="--d:.52s">
+          <span>Student</span><span class="sep"></span><span>Visual Designer</span><span class="sep"></span><span>Developer</span>
+        </p>
+        <p class="hero-desc" data-anim style="--d:.62s">
+          Saya bukan orang yang suka banyak bicara. Saya lebih suka mencoba, membuat sesuatu,
+          dan membiarkan hasilnya yang berbicara.
+        </p>
+        <div class="hero-actions" data-anim style="--d:.72s">
+          <a href="#projects" class="btn btn-primary">Lihat Proyek <svg><use href="#i-arrow-right"/></svg></a>
+          <a href="#about" class="btn btn-ghost">Tentang Saya</a>
+        </div>
+      </div>
+
+      <div class="hero-media" data-anim style="--d:.82s">
+        <div class="photo-stage" id="tiltPhoto">
+          <!-- Glow halo -->
+          <div class="photo-halo" aria-hidden="true"></div>
+
+          <!-- Rotating border ring -->
+          <div class="photo-ring" aria-hidden="true"></div>
+
+          <!-- Sparkle particles -->
+          <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+          <!-- Circle frame -->
+          <div class="circle-frame">
+            <div class="circle-inner">
+              <img src="https://files.maelyn.eu/m/a39a312e-c214-4d37-b976-f82b1b2e4914" alt="Foto profil Risky Dinata" width="740" height="925">
+            </div>
+          </div>
+
+          <!-- Floating chips -->
+          <span class="float-chip c1"><svg><use href="#i-spark"/></svg>RISKY</span>
+          <span class="float-chip c2"><svg><use href="#i-palette"/></svg>DINATA</span>
+          <span class="float-chip c3"><svg><use href="#i-pin"/></svg>Cirebon, ID</span>
+        </div>
+
+        <ul class="hero-meta">
+          <li><svg><use href="#i-calendar"/></svg>16 Years Old</li>
+          <li><svg><use href="#i-pin"/></svg>Cirebon, Indonesia</li>
+          <li><svg><use href="#i-palette"/></svg>DKV / XI</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MARQUEE
+       ============================================================ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Visual Design<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Programming<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Web Development<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Automation<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Hosting &amp; VPS<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">API Integration<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Graphic Design<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Digital Tools<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Visual Design<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Programming<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Web Development<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Automation<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Hosting &amp; VPS<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">API Integration<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Graphic Design<svg class="star"><use href="#i-spark"/></svg></span>
+      <span class="marquee-item">Digital Tools<svg class="star"><use href="#i-spark"/></svg></span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">01</span><span class="line"></span><span class="label">Tentang Saya</span></div>
+        <h2>Sedikit tentang <span class="hl">saya</span>.</h2>
+      </div>
+      <div class="about-body reveal">
+        <p>Saya adalah siswa kelas XI DKV yang memiliki ketertarikan pada dunia desain, teknologi, dan pemrograman. Saya suka mencoba hal-hal baru, terutama sesuatu yang bisa menghasilkan karya atau membantu menyelesaikan suatu masalah.</p>
+        <p>Saya mulai tertarik dengan desain melalui berbagai karya visual seperti poster dan logo. Di sisi lain, saya juga tertarik dengan dunia pemrograman dan teknologi, mulai dari membuat Bot WhatsApp, mengelola hosting dan VPS, sampai mencoba membangun website dan berbagai tools digital.</p>
+        <p>Di sekolah, saya aktif mengikuti OSIS di bidang IPTEK/PDD. Bagi saya, pengalaman bukan cuma tentang mendapatkan hasil, tetapi juga tentang proses mencoba, belajar dari kesalahan, dan terus berkembang.</p>
+        <p>Saya mungkin bukan orang yang paling banyak bicara, tetapi saya lebih suka menunjukkan apa yang saya bisa lewat hasil yang saya kerjakan.</p>
+        <p class="note">Saya termasuk orang yang cukup pendiam dan agak pemalu. Kadang saya terlihat cuek, padahal sebenarnya saya lebih suka menghemat energi dan tidak terlalu banyak melakukan hal yang menurut saya tidak perlu.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="stats-grid reveal">
+        <div class="stat-card" data-spotlight><p class="stat-num"><span class="count" data-count="16">0</span></p><p class="stat-label">Tahun</p></div>
+        <div class="stat-card" data-spotlight><p class="stat-num">XI <span class="suffix">/ DKV</span></p><p class="stat-label">Kelas saat ini</p></div>
+        <div class="stat-card" data-spotlight><p class="stat-num"><span class="count" data-count="2023">0</span></p><p class="stat-label">Mulai eksplorasi</p></div>
+        <div class="stat-card" data-spotlight><p class="stat-num"><span class="count" data-count="2">0</span> <span class="suffix">proyek</span></p><p class="stat-label">Sedang berjalan</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PERSONAL INFO
+       ============================================================ -->
+  <section class="section-sm">
+    <div class="container">
+      <dl class="info-list reveal">
+        <div class="info-item"><dt><svg><use href="#i-user"/></svg>Nama</dt><dd>Risky Dinata</dd></div>
+        <div class="info-item"><dt><svg><use href="#i-spark"/></svg>Panggilan</dt><dd>Risky / Dinata</dd></div>
+        <div class="info-item"><dt><svg><use href="#i-calendar"/></svg>Umur</dt><dd>16 tahun</dd></div>
+        <div class="info-item"><dt><svg><use href="#i-pin"/></svg>Domisili</dt><dd>Kabupaten Cirebon</dd></div>
+        <div class="info-item"><dt><svg><use href="#i-graduation"/></svg>Sekolah</dt><dd>SMK Ulil Albab Depok</dd></div>
+        <div class="info-item"><dt><svg><use href="#i-palette"/></svg>Kelas / Jurusan</dt><dd>XI — Desain Komunikasi Visual</dd></div>
+      </dl>
+
+      <div class="hobby-grid reveal">
+        <div>
+          <p class="hobby-title"><svg><use href="#i-headphones"/></svg>Hobi</p>
+          <p style="color:var(--text-2);font-size:var(--fs-base);margin:0;">Mendengarkan musik.</p>
+        </div>
+        <div>
+          <p class="hobby-title"><svg><use href="#i-sparkles"/></svg>Minat</p>
+          <ul class="chip-row">
+            <li class="chip">Desain grafis</li>
+            <li class="chip">Programming</li>
+            <li class="chip">Web development</li>
+            <li class="chip">Teknologi</li>
+            <li class="chip">Pengembangan proyek digital</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MOTTO
+       ============================================================ -->
+  <section class="motto-section">
+    <div class="container">
+      <div class="section-marker reveal"><span class="num">✦</span><span class="line"></span><span class="label">Personal Motto</span></div>
+      <blockquote class="motto reveal">“Aku tidak akan melakukan sesuatu yang tidak harus kulakukan. Tapi jika terpaksa harus melakukannya, maka akan <em>kuselesaikan sesingkat mungkin</em>.”</blockquote>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS
+       ============================================================ -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">02</span><span class="line"></span><span class="label">Keahlian</span></div>
+        <h2>Yang sedang saya kerjakan dan <span class="hl">pelajari</span>.</h2>
+      </div>
+
+      <div class="skill-grid">
+        <div class="skill-block reveal">
+          <div class="skill-icon"><svg><use href="#i-palette"/></svg></div>
+          <p class="skill-title">Visual Design</p>
+          <ul class="plain-list"><li>Poster Design</li><li>Logo Design</li><li>Graphic Design</li><li>Berbagai kebutuhan desain grafis</li></ul>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-icon"><svg><use href="#i-code"/></svg></div>
+          <p class="skill-title">Programming</p>
+          <ul class="plain-list"><li>JavaScript</li><li>Backend</li><li>API</li><li>Automation</li></ul>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-icon"><svg><use href="#i-globe"/></svg></div>
+          <p class="skill-title">Web Development</p>
+          <ul class="plain-list"><li>Website</li><li>Digital Tools</li><li>API Integration</li><li>Pengembangan website</li></ul>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-icon"><svg><use href="#i-server"/></svg></div>
+          <p class="skill-title">Hosting &amp; Infrastructure</p>
+          <ul class="plain-list"><li>VPS</li><li>Panel Pterodactyl</li><li>Hosting</li><li>Server Management</li></ul>
+        </div>
+      </div>
+
+      <div class="sub-block reveal">
+        <div>
+          <div class="section-marker"><span class="num">✦</span><span class="line"></span><span class="label">Tools &amp; Technologies</span></div>
+          <h3>Tools yang pernah digunakan</h3>
+        </div>
+        <div>
+          <ul class="chip-row">
+            <li class="chip">Canva</li><li class="chip">Alight Motion</li><li class="chip">Panel Pterodactyl</li><li class="chip">VPS</li><li class="chip">JavaScript</li><li class="chip">API</li><li class="chip">Netlify</li><li class="chip">Tools pendukung desain &amp; development</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-block reveal">
+        <div>
+          <div class="section-marker"><span class="num">✦</span><span class="line"></span><span class="label">Currently Learning</span></div>
+          <h3>Masih terus belajar.</h3>
+        </div>
+        <div>
+          <ul class="chip-row" style="margin-bottom:20px;">
+            <li class="chip">Desain</li><li class="chip">Backend</li><li class="chip">JavaScript</li><li class="chip">Hosting</li><li class="chip">Development</li><li class="chip">Pengembangan Website</li>
+          </ul>
+          <p>Saya masih terus mengembangkan kemampuan desain agar hasilnya semakin baik. Saya juga sedang mempelajari dunia hosting dan development lebih dalam, terutama backend, JavaScript, serta berbagai hal yang berkaitan dengan pemrograman dan pengembangan website.</p>
+        </div>
+      </div>
+
+      <div class="sub-block reveal">
+        <div>
+          <div class="section-marker"><span class="num">✦</span><span class="line"></span><span class="label">Other Experience</span></div>
+          <h3>Marching Band</h3>
+        </div>
+        <div>
+          <p>Saya memiliki pengalaman di bidang Marching Band setelah mengikuti ekstrakurikuler Marching Band di SMPN 2 Plered sebagai bagian dari GITA BAHANA ANNAPLE. Dari kegiatan tersebut saya belajar tentang latihan rutin, kedisiplinan, dan kerja sama dalam sebuah tim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS
+       ============================================================ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">03</span><span class="line"></span><span class="label">Proyek</span></div>
+        <h2>Beberapa hal yang pernah saya <span class="hl">buat</span>.</h2>
+        <p class="section-desc">Proyek-proyek berikut merupakan bagian dari proses saya dalam belajar, mencoba teknologi, dan membuat sesuatu yang bisa digunakan.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project-card reveal" data-project="wa" data-spotlight tabindex="0" role="button" aria-label="Buka detail proyek WhatsApp Chat Bot">
+          <div class="project-media">
+            <img src="https://i.ibb.co/TBvq7wzB/Screenshot-20260930-115422-Whats-App.jpg" alt="Tangkapan layar proyek WhatsApp Chat Bot" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="project-top"><span class="cat">Development / Automation</span><span class="year">2023 — 2026</span></div>
+            <h3>WhatsApp Chat Bot</h3>
+            <p>Bot WhatsApp yang dikembangkan secara bertahap untuk membantu berbagai kebutuhan sehari-hari, mulai dari percobaan awal pada tahun 2023 hingga pembaruan terbaru.</p>
+            <ul class="chip-row"><li class="chip">VPS</li><li class="chip">Panel Pterodactyl</li><li class="chip">API</li><li class="chip">JavaScript</li></ul>
+            <div class="project-actions">
+              <button class="btn-detail" type="button" data-project="wa">Lihat Detail <svg><use href="#i-arrow-right"/></svg></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-project="multimedia" data-spotlight tabindex="0" role="button" aria-label="Buka detail proyek Multimedia Tools">
+          <div class="project-media">
+            <div class="placeholder" aria-hidden="true"><span><svg><use href="#i-image"/></svg>Image coming soon</span></div>
+          </div>
+          <div class="project-body">
+            <div class="project-top"><span class="cat">Web Development / Digital Tools</span><span class="year">2026</span></div>
+            <h3>Multimedia Tools</h3>
+            <p>Platform all-in-one yang menyediakan berbagai kebutuhan multimedia dalam satu tempat, mulai dari downloader hingga tools berbasis AI.</p>
+            <ul class="chip-row"><li class="chip">API</li><li class="chip">Netlify</li><li class="chip">JavaScript</li></ul>
+            <div class="project-actions">
+              <button class="btn-detail" type="button" data-project="multimedia">Lihat Detail <svg><use href="#i-arrow-right"/></svg></button>
+              <a class="link-arrow" href="https://multimedia-tools.netlify.app" target="_blank" rel="noopener">Buka Website <svg><use href="#i-arrow-up-right"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KARYA
+       ============================================================ -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">04</span><span class="line"></span><span class="label">Karya</span></div>
+        <h2>Visual work &amp; creative <span class="hl">projects</span>.</h2>
+      </div>
+
+      <figure class="work-figure reveal">
+        <button class="work-image" type="button" data-lightbox="https://i.ibb.co/KpmD0p42/BURGER-20250829-085932-0000.png" data-title="Poster Daftar Produk Makanan" data-category="Graphic Design" aria-label="Perbesar gambar">
+          <img src="https://i.ibb.co/KpmD0p42/BURGER-20250829-085932-0000.png" alt="Poster daftar produk makanan" loading="lazy">
+        </button>
+        <figcaption class="work-caption">
+          <h3>Poster Daftar Produk Makanan</h3>
+          <p class="cat">Graphic Design</p>
+        </figcaption>
+      </figure>
+
+      <div class="video-block reveal">
+        <div class="video-frame" id="videoFrame">
+          <img src="https://img.youtube.com/vi/rUvju1TBRvI/maxresdefault.jpg" alt="Thumbnail video hasil editing" loading="lazy">
+          <button class="play-btn" type="button" id="playVideo" aria-label="Putar video"><svg><use href="#i-play"/></svg></button>
+        </div>
+        <div class="video-info">
+          <div class="section-marker"><span class="num">✦</span><span class="line"></span><span class="label">Video Editing</span></div>
+          <h3>Editing Video</h3>
+          <p>Terlibat dalam proses editing video bersama Arjun.</p>
+          <a class="link-arrow" href="https://youtu.be/rUvju1TBRvI" target="_blank" rel="noopener">Tonton di YouTube <svg><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+      </div>
+
+      <div class="empty-grid reveal">
+        <div><p class="empty-title"><svg><use href="#i-image"/></svg>Photography</p><p>Belum ada karya fotografi yang ingin ditampilkan.</p></div>
+        <div><p class="empty-title"><svg><use href="#i-sparkles"/></svg>Digital</p><p>Belum ada karya digital yang ingin ditampilkan.</p></div>
+      </div>
+
+      <p class="empty-note reveal"><svg><use href="#i-spark"/></svg>More work coming later</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE
+       ============================================================ -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">05</span><span class="line"></span><span class="label">Pengalaman</span></div>
+        <h2>Hal-hal yang pernah saya <span class="hl">ikuti</span>.</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal"><p class="tl-period">2026 — 2027</p><h3>OSIS — IPTEK / PDD</h3><p class="tl-place"><svg><use href="#i-graduation"/></svg>SMK Ulil Albab Depok</p><p>Saat ini aktif mengikuti OSIS di SMK Ulil Albab Depok pada bidang IPTEK/PDD.</p></div>
+        <div class="tl-item reveal"><p class="tl-period">2026</p><h3>Panitia Kegiatan Sekolah</h3><p class="tl-place"><svg><use href="#i-briefcase"/></svg>SMK Ulil Albab Depok</p><p>Pernah terlibat sebagai panitia dalam kegiatan MPLS serta beberapa kegiatan sekolah lainnya.</p></div>
+        <div class="tl-item reveal"><p class="tl-period">SMP</p><h3>Marching Band</h3><p class="tl-place"><svg><use href="#i-sparkles"/></svg>GITA BAHANA ANNAPLE — SMPN 2 Plered</p><p>Mengikuti ekstrakurikuler Marching Band dan mendapatkan pengalaman dalam latihan, kerja sama, serta kegiatan dalam sebuah tim.</p></div>
+        <div class="tl-item reveal"><p class="tl-period">Volunteer</p><h3>Membantu Melatih Marching Band</h3><p class="tl-place"><svg><use href="#i-user"/></svg>Lingkungan sekolah</p><p>Pernah membantu mengajar dan melatih anggota Marching Band di SMP dalam skala kecil. Dari pengalaman tersebut saya belajar bagaimana menyampaikan sesuatu kepada orang lain dan bekerja bersama dalam sebuah tim.</p></div>
+      </div>
+
+      <div class="sub-block reveal">
+        <div><div class="section-marker"><span class="num">✦</span><span class="line"></span><span class="label">Personal Journey</span></div><h3>Catatan kecil.</h3></div>
+        <div><p>Beberapa pengalaman yang kurang menyenangkan dalam perjalanan saya mengajarkan saya untuk tidak terlalu bergantung pada penilaian orang lain. Saya belajar untuk tetap berkembang, memperbaiki diri, dan terus berjalan meskipun keadaan tidak selalu mendukung.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EDUCATION
+       ============================================================ -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">06</span><span class="line"></span><span class="label">Pendidikan</span></div>
+        <h2>Pendidikan.</h2>
+      </div>
+      <div class="edu-card reveal">
+        <div><p class="period"><svg><use href="#i-calendar"/></svg>2025 — Sekarang</p></div>
+        <div>
+          <h3>SMK Ulil Albab Depok</h3>
+          <p class="period"><svg><use href="#i-palette"/></svg>Desain Komunikasi Visual (DKV) — Kelas XI</p>
+          <p>Saat ini saya sedang menempuh pendidikan di bidang Desain Komunikasi Visual sambil mengembangkan ketertarikan pada desain, programming, teknologi, dan berbagai proyek digital.</p>
+        </div>
+      </div>
+      <div class="mini-grid reveal">
+        <div class="mini-card"><div class="mini-head"><span class="mini-icon"><svg><use href="#i-award"/></svg></span><h3>Achievements</h3></div><p>Saat ini saya lebih berfokus pada pengembangan skill, pengalaman organisasi, serta membangun berbagai proyek dan karya.</p></div>
+        <div class="mini-card"><div class="mini-head"><span class="mini-icon"><svg><use href="#i-bookmark"/></svg></span><h3>Certificates</h3></div><p>Belum ada sertifikat yang ingin ditampilkan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FUTURE
+       ============================================================ -->
+  <section class="section" id="future">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-marker"><span class="num">07</span><span class="line"></span><span class="label">Future</span></div>
+        <h2>Membangun sesuatu dari <span class="hl">nol</span>.</h2>
+        <p class="section-desc">Saya ingin bekerja terlebih dahulu untuk mendapatkan pengalaman sekaligus mengumpulkan modal. Setelah memiliki cukup pengalaman dan modal, saya ingin memulai usaha kecil-kecilan, kemudian mengembangkannya secara bertahap hingga menjadi usaha yang lebih besar.</p>
+      </div>
+      <div class="flow reveal" aria-label="Alur tujuan">
+        <span class="step"><span class="idx">01</span>Work</span>
+        <span class="sep"><svg><use href="#i-arrow-right"/></svg></span>
+        <span class="step"><span class="idx">02</span>Experience</span>
+        <span class="sep"><svg><use href="#i-arrow-right"/></svg></span>
+        <span class="step"><span class="idx">03</span>Capital</span>
+        <span class="sep"><svg><use href="#i-arrow-right"/></svg></span>
+        <span class="step"><span class="idx">04</span>Start</span>
+        <span class="sep"><svg><use href="#i-arrow-right"/></svg></span>
+        <span class="step"><span class="idx">05</span>Grow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRINCIPLE
+       ============================================================ -->
+  <section class="principle">
+    <div class="container">
+      <div class="section-marker reveal"><span class="num">✦</span><span class="line"></span><span class="label">My Principle</span></div>
+      <p class="reveal">Tidak perlu berlebihan. Kerjakan yang perlu, selesaikan dengan baik, lalu lanjut ke hal berikutnya.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="section" id="contact">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <div class="section-marker"><span class="num">08</span><span class="line"></span><span class="label">Kontak</span></div>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);letter-spacing:-.035em;margin-top:8px;">Mari <span class="hl">terhubung</span>.</h2>
+        <p class="contact-desc">Jika ingin menghubungi saya, melihat project saya, atau sekadar terhubung melalui media sosial, berikut beberapa kontak yang dapat digunakan.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://t.me/dinatacode" target="_blank" rel="noopener"><svg><use href="#i-telegram"/></svg>Contact Me</a>
+          <a class="btn btn-ghost" href="mailto:riskydinata86@smp.belajar.id"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <ul class="contact-list">
+          <li><a class="contact-card" href="https://t.me/dinatacode" target="_blank" rel="noopener"><span class="contact-icon"><svg><use href="#i-telegram"/></svg></span><span class="contact-info"><span class="contact-label">Telegram — Utama</span><span class="contact-value">@dinatacode</span></span><span class="contact-arrow"><svg><use href="#i-arrow-up-right"/></svg></span></a></li>
+          <li><a class="contact-card" href="mailto:riskydinata86@smp.belajar.id"><span class="contact-icon"><svg><use href="#i-mail"/></svg></span><span class="contact-info"><span class="contact-label">Email</span><span class="contact-value">riskydinata86@smp.belajar.id</span></span><span class="contact-arrow"><svg><use href="#i-arrow-up-right"/></svg></span></a></li>
+          <li><a class="contact-card" href="https://wa.me/6289518898764" target="_blank" rel="noopener"><span class="contact-icon"><svg><use href="#i-whatsapp"/></svg></span><span class="contact-info"><span class="contact-label">WhatsApp</span><span class="contact-value">0895-1889-8764</span></span><span class="contact-arrow"><svg><use href="#i-arrow-up-right"/></svg></span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top:88px;">
+      <div class="section-marker reveal"><span class="num">✦</span><span class="line"></span><span class="label">Social Media</span></div>
+
+      <div class="reveal" style="margin-top:22px;">
+        <details class="accordion">
+          <summary><span class="acc-summary-left"><span class="acc-icon"><svg><use href="#i-instagram"/></svg></span>Instagram<span class="acc-count">6 akun</span></span><span class="acc-toggle"><svg><use href="#i-plus"/></svg></span></summary>
+          <div class="acc-body">
+            <a class="chip" href="https://instagram.com/riskyy.di" target="_blank" rel="noopener">@riskyy.di</a>
+            <a class="chip" href="https://instagram.com/risky.softspoken" target="_blank" rel="noopener">@risky.softspoken</a>
+            <a class="chip" href="https://instagram.com/dinatacode" target="_blank" rel="noopener">@dinatacode</a>
+            <a class="chip" href="https://instagram.com/risky.nation.quotes" target="_blank" rel="noopener">@risky.nation.quotes</a>
+            <a class="chip" href="https://instagram.com/tertawa_yahaha" target="_blank" rel="noopener">@tertawa_yahaha</a>
+            <a class="chip" href="https://instagram.com/tuanliebert1" target="_blank" rel="noopener">@tuanliebert1</a>
+          </div>
+        </details>
+
+        <details class="accordion">
+          <summary><span class="acc-summary-left"><span class="acc-icon"><svg><use href="#i-github"/></svg></span>GitHub<span class="acc-count">3 repos</span></span><span class="acc-toggle"><svg><use href="#i-plus"/></svg></span></summary>
+          <div class="acc-body">
+            <a class="chip" href="https://github.com/RiskyHosting" target="_blank" rel="noopener">RiskyHosting</a>
+            <a class="chip" href="https://github.com/dinataxcode" target="_blank" rel="noopener">dinataxcode</a>
+            <a class="chip" href="https://github.com/dinatacode" target="_blank" rel="noopener">dinatacode</a>
+          </div>
+        </details>
+
+        <details class="accordion">
+          <summary><span class="acc-summary-left"><span class="acc-icon"><svg><use href="#i-tiktok"/></svg></span>TikTok<span class="acc-count">7 akun</span></span><span class="acc-toggle"><svg><use href="#i-plus"/></svg></span></summary>
+          <div class="acc-body">
+            <a class="chip" href="https://tiktok.com/@risky.nation.quotes" target="_blank" rel="noopener">@risky.nation.quotes</a>
+            <a class="chip" href="https://tiktok.com/@risky.nation.vip" target="_blank" rel="noopener">@risky.nation.vip</a>
+            <a class="chip" href="https://tiktok.com/@risky.softspokenn" target="_blank" rel="noopener">@risky.softspokenn</a>
+            <a class="chip" href="https://tiktok.com/@netral.komunitas" target="_blank" rel="noopener">@netral.komunitas</a>
+            <a class="chip" href="https://tiktok.com/@risky.history" target="_blank" rel="noopener">@risky.history</a>
+            <a class="chip" href="https://tiktok.com/@risky.desain.id" target="_blank" rel="noopener">@risky.desain.id</a>
+            <a class="chip" href="https://tiktok.com/@opw__riskyy" target="_blank" rel="noopener">@opw__riskyy</a>
+          </div>
+        </details>
+
+        <details class="accordion">
+          <summary><span class="acc-summary-left"><span class="acc-icon"><svg><use href="#i-telegram"/></svg></span>Telegram<span class="acc-count">2 akun</span></span><span class="acc-toggle"><svg><use href="#i-plus"/></svg></span></summary>
+          <div class="acc-body">
+            <a class="chip" href="https://t.me/riskydinata" target="_blank" rel="noopener">@riskydinata</a>
+            <a class="chip" href="https://t.me/dinatacode" target="_blank" rel="noopener">@dinatacode</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2><span class="brand-mark">RD</span>Risky Dinata</h2>
+        <p>Student • Visual Designer • Developer</p>
+        <p>Kabupaten Cirebon, Indonesia</p>
+        <p class="footer-contact"><svg><use href="#i-pin"/></svg>Based in Cirebon, ID</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Navigasi</h3>
+        <ul>
+          <li><a href="#home"><svg><use href="#i-home"/></svg>Beranda</a></li>
+          <li><a href="#about"><svg><use href="#i-user"/></svg>Tentang</a></li>
+          <li><a href="#skills"><svg><use href="#i-sparkles"/></svg>Keahlian</a></li>
+          <li><a href="#projects"><svg><use href="#i-grid"/></svg>Proyek</a></li>
+          <li><a href="#experience"><svg><use href="#i-briefcase"/></svg>Pengalaman</a></li>
+          <li><a href="#contact"><svg><use href="#i-mail"/></svg>Kontak</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Sosial</h3>
+        <ul>
+          <li><a href="https://t.me/dinatacode" target="_blank" rel="noopener"><svg><use href="#i-telegram"/></svg>Telegram</a></li>
+          <li><a href="https://instagram.com/dinatacode" target="_blank" rel="noopener"><svg><use href="#i-instagram"/></svg>Instagram</a></li>
+          <li><a href="https://github.com/dinatacode" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>GitHub</a></li>
+          <li><a href="https://tiktok.com/@risky.nation.quotes" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg>TikTok</a></li>
+          <li><a href="https://wa.me/6289518898764" target="_blank" rel="noopener"><svg><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
+          <li><a href="mailto:riskydinata86@smp.belajar.id"><svg><use href="#i-mail"/></svg>Email</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Risky Dinata</p>
+      <a class="to-top" href="#home">Back to top <svg><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top-float" id="toTopFloat" type="button" aria-label="Kembali ke atas"><svg><use href="#i-arrow-up"/></svg></button>
+
+<!-- ============================================================
+     AUDIO CONTROL
+     ============================================================ -->
+<div class="audio-control" id="audioControl" aria-label="Kontrol musik latar">
+  <button class="audio-btn" id="audioBtn" type="button" aria-label="Putar musik">
+    <svg class="audio-icon-play"><use href="#i-play"/></svg>
+    <svg class="audio-icon-pause" style="display:none"><use href="#i-pause"/></svg>
+  </button>
+  <div class="audio-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <span class="audio-label" id="audioLabel">Music</span>
+</div>
+
+<!-- ============================================================
+     PROJECT MODAL
+     ============================================================ -->
+<div class="modal" id="projectModal" hidden>
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" data-close aria-label="Tutup detail proyek"><svg><use href="#i-close"/></svg></button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LIGHTBOX
+     ============================================================ -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Tutup gambar"><svg><use href="#i-close"/></svg></button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-cap"><h3 id="lightboxTitle"></h3><p id="lightboxCat"></p></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MIZUNO — FLOATING AI ROBOT
+     ============================================================ -->
+<div id="mizuno-bot" role="button" tabindex="0" aria-label="Buka asisten AI Mizuno">
+  <div class="mizuno-wrapper" id="mizuno-wrapper">
+    <div class="mizuno-bubble" id="mizuno-bubble"></div>
+    <div class="mizuno-antenna"><span class="mizuno-ant-ball"></span></div>
+    <div class="mizuno-head">
+      <div class="mizuno-visor">
+        <div class="mizuno-eyes" id="mizuno-eyes">
+          <div class="mizuno-eye"></div>
+          <div class="mizuno-eye"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mizuno-mouth"></div>
+    <div class="mizuno-body">
+      <span class="mizuno-light"></span>
+      <span class="mizuno-light"></span>
+      <span class="mizuno-light"></span>
+    </div>
+    <div class="mizuno-shadow"></div>
+  </div>
+</div>
+
+<div id="mizuno-chat-backdrop"></div>
+<div id="mizuno-chat" role="dialog" aria-modal="true" aria-labelledby="mizuno-chat-title">
+  <div class="mizuno-chat-head">
+    <div class="mizuno-chat-avatar"></div>
+    <div class="mizuno-chat-info">
+      <h3 id="mizuno-chat-title">Mizuno</h3>
+      <span class="mizuno-chat-status"><span class="dot"></span>Online</span>
+    </div>
+    <button class="mizuno-chat-close" id="mizuno-chat-close" type="button" aria-label="Tutup chat"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <div id="mizuno-chat-history"></div>
+  <div class="mizuno-chat-input-area">
+    <textarea id="mizuno-chat-input" rows="1" placeholder="Tanya apa aja ke Mizuno..." aria-label="Pesan"></textarea>
+    <button id="mizuno-send-btn" type="button" aria-label="Kirim pesan"><svg><use href="#i-send"/></svg></button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="app.js"></script>
+<script src="audio-player.js"></script>
+<script src="mizuno-ai.js"></script>
+
+</body>
+  </html>
